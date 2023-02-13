@@ -1,0 +1,25 @@
+DROP DATABASE IF EXISTS `jarditou`;
+CREATE DATABASE `jarditou`;
+USE `jarditou`;
+
+CREATE TABLE client(
+    cli_id INT NOT NULL AUTO_INCREMENT,
+    cli_type BOOLEAN,
+    cli_nom VARCHAR(50) NOT NULL,
+    cli_prenom VARCHAR(50) NOT NULL,
+    cli_adresse VARCHAR(100) NOT NULL,
+    cli_ville VARCHAR(10) NOT NULL,
+    cli_tel VARCHAR(10) NOT NULL,
+    cli_mail VARCHAR(50) NOT NULL,
+    PRIMARY KEY (cli_id);
+    )
+
+CREATE TABLE commande(
+    com_id INT NOT NULL AUTO_INCREMENT,
+    com_dateCommande DATE NOT NULL,
+    com_dateLivraison DATE NOT NULL,
+    com_etatCommande VARCHAR(25) NOT NULL,
+    com_editionFacture BOOLEAN NOT NULL,
+    cli_id INT NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (com_id);
+    )
