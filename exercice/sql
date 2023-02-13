@@ -1,0 +1,31 @@
+DROP DATABASE IF EXISTS `exercice`;
+CREATE DATABASE `exercice`;
+USE `exercice`;
+
+CREATE TABLE client(
+    cli_num	INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    cli_nom varchar(50) NOT NULL,
+    cli_adresse varchar(50) NOT null,
+    cli_tel varchar(50) not null
+);
+
+CREATE TABLE commande(
+    com_num int not null primary key AUTO_INCREMENT,
+    cli_num int not null,
+    com_date date not null,
+    com_obs varchar(50),
+    foreign key (cli_num) references client (cli_num)
+);
+
+CREATE TABLE detail(
+    com_num int not null AUTO_INCREMENT,
+    pro_num int not null,
+    det_qte int not null,
+    primary key (com_num, pro_num)
+);
+
+CREATE TABLE produit(
+    pro_num int not null PRIMARY KEY AUTO_INCREMENT,
+    pro_libelle varchar(50) not null,
+    pro_description varchar(50)
+);
