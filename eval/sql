@@ -19,7 +19,51 @@ CREATE TABLE commande(
     com_dateCommande DATE NOT NULL,
     com_dateLivraison DATE NOT NULL,
     com_etatCommande VARCHAR(25) NOT NULL,
-    com_editionFacture BOOLEAN NOT NULL,
+    com_editionFacture BIT(1),
     cli_id INT NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY (com_id);
+    PRIMARY KEY (com_id),
+    FOREIGN KEY (cli_id) REFERENCES client (cli_id);
     )
+
+CREATE TABLE panier(
+    pan_quantiProduit INT NOT NULL AUTO_INCREMENT,
+    pan_prixVentePar FLOAT NOT NULL,
+    pan_prixVentePro FLOAT NOT NULL,
+    pro_code CHAR(6) NOT NULL,
+    com_id INT NOT NULL,
+    PRIMARY KEY (pan_quantiProduit),
+    FOREIGN KEY ;
+)
+
+CREATE TABLE produit(
+    pro_code CHAR(6) NOT NULL AUTO_INCREMENT,
+    prod_lib VARCHAR(100) NOT NULL,
+    prod_desc VARCHAR(250),
+    prod_phot VARCHAR(250),
+    prod_affichage BIT(1),
+    prod_prixAchat INT NOT NULL,
+    prod_stockPhy INT NOT NULL,
+    prod_stockAlerte INT NOT NULL,
+    fourni_id INT NOT NULL,
+    rubri_id INT NOT NULL,
+    PRIMARY KEY (pro_code),
+    FOREIGN KEY ;
+)
+
+CREATE TABLE fournisseur(
+    fourni_id INT NOT NULL,
+    fourni_nom VARCHAR(50) NOT NULL,
+    fourni_adress VARCHAR(100) NOT NULL,
+    fourni_cp CHAR(5) NOT NULL,
+    fourni_ville VARCHAR(50) NOT NULL,
+    fourni_tel VARCHAR(10) NOT NULL,
+    fourni_mail VARCHAR(50) NOT NULL,
+    fourni_type BIT(1) NOT NULL,
+    PRIMARY KEY (fourni_id);
+)
+
+CREATE TABLE rubrique(
+    rubri_id INT NOT NULL,
+    rubri_lib VARCHAR(50),
+    PRIMARY KEY (rubri_id);
+)
