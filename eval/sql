@@ -26,12 +26,12 @@ CREATE TABLE commande(
     );
 
 CREATE TABLE panier(
-    pan_quantiProduit INT NOT NULL AUTO_INCREMENT,
+    pan_quantiProduit INT NOT NULL,
     pan_prixVentePar FLOAT NOT NULL,
     pan_prixVentePro FLOAT NOT NULL,
     pro_code CHAR(6) NOT NULL,
     com_id INT NOT NULL,
-    PRIMARY KEY (pan_quantiProduit),
+    PRIMARY KEY (pro_code, com_id),
     FOREIGN KEY (com_id) REFERENCES commande (com_id)
 );
 
