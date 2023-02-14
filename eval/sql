@@ -11,8 +11,8 @@ CREATE TABLE client(
     cli_ville VARCHAR(10) NOT NULL,
     cli_tel VARCHAR(10) NOT NULL,
     cli_mail VARCHAR(50) NOT NULL,
-    PRIMARY KEY (cli_id);
-    )
+    PRIMARY KEY (cli_id)
+    );
 
 CREATE TABLE commande(
     com_id INT NOT NULL AUTO_INCREMENT,
@@ -20,10 +20,10 @@ CREATE TABLE commande(
     com_dateLivraison DATE NOT NULL,
     com_etatCommande VARCHAR(25) NOT NULL,
     com_editionFacture BIT(1),
-    cli_id INT NOT NULL AUTO_INCREMENT,
+    cli_id INT NOT NULL,
     PRIMARY KEY (com_id),
-    FOREIGN KEY (cli_id) REFERENCES client (cli_id);
-    )
+    FOREIGN KEY (cli_id) REFERENCES client (cli_id)
+    );
 
 CREATE TABLE panier(
     pan_quantiProduit INT NOT NULL AUTO_INCREMENT,
@@ -32,11 +32,29 @@ CREATE TABLE panier(
     pro_code CHAR(6) NOT NULL,
     com_id INT NOT NULL,
     PRIMARY KEY (pan_quantiProduit),
-    FOREIGN KEY ;
-)
+    FOREIGN KEY (com_id) REFERENCES commande (com_id)
+);
+
+CREATE TABLE fournisseur(
+    fourni_id INT NOT NULL AUTO_INCREMENT,
+    fourni_nom VARCHAR(50) NOT NULL,
+    fourni_adress VARCHAR(100) NOT NULL,
+    fourni_cp CHAR(5) NOT NULL,
+    fourni_ville VARCHAR(50) NOT NULL,
+    fourni_tel VARCHAR(10) NOT NULL,
+    fourni_mail VARCHAR(50) NOT NULL,
+    fourni_type BIT(1) NOT NULL,
+    PRIMARY KEY (fourni_id)
+);
+
+CREATE TABLE rubrique(
+    rubri_id INT NOT NULL AUTO_INCREMENT,
+    rubri_lib VARCHAR(50),
+    PRIMARY KEY (rubri_id)
+);
 
 CREATE TABLE produit(
-    pro_code CHAR(6) NOT NULL AUTO_INCREMENT,
+    pro_code CHAR(6) NOT NULL,
     prod_lib VARCHAR(100) NOT NULL,
     prod_desc VARCHAR(250),
     prod_phot VARCHAR(250),
@@ -47,23 +65,9 @@ CREATE TABLE produit(
     fourni_id INT NOT NULL,
     rubri_id INT NOT NULL,
     PRIMARY KEY (pro_code),
-    FOREIGN KEY ;
-)
+    CONSTRAINT FK_produitFourni FOREIGN KEY (fourni_id) REFERENCES fournisseur (fourni_id),
+    CONSTRAINT FK_produitRubrique FOREIGN KEY (rubri_id) REFERENCES rubrique (rubri_id)
+);
 
-CREATE TABLE fournisseur(
-    fourni_id INT NOT NULL,
-    fourni_nom VARCHAR(50) NOT NULL,
-    fourni_adress VARCHAR(100) NOT NULL,
-    fourni_cp CHAR(5) NOT NULL,
-    fourni_ville VARCHAR(50) NOT NULL,
-    fourni_tel VARCHAR(10) NOT NULL,
-    fourni_mail VARCHAR(50) NOT NULL,
-    fourni_type BIT(1) NOT NULL,
-    PRIMARY KEY (fourni_id);
-)
-
-CREATE TABLE rubrique(
-    rubri_id INT NOT NULL,
-    rubri_lib VARCHAR(50),
-    PRIMARY KEY (rubri_id);
-)
+ALTER TABLE panier
+ADD FOREIGN KEY (pro_code) REFERENCES produit (pro_code);
