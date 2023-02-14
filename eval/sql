@@ -8,6 +8,7 @@ CREATE TABLE client(
     cli_nom VARCHAR(50) NOT NULL,
     cli_prenom VARCHAR(50) NOT NULL,
     cli_adresse VARCHAR(100) NOT NULL,
+    cli_cp CHAR(5) NOT NULL,
     cli_ville VARCHAR(10) NOT NULL,
     cli_tel VARCHAR(10) NOT NULL,
     cli_mail VARCHAR(50) NOT NULL,
@@ -71,3 +72,20 @@ CREATE TABLE produit(
 
 ALTER TABLE panier
 ADD FOREIGN KEY (pro_code) REFERENCES produit (pro_code);
+
+CREATE INDEX index_nom_client ON client (cli_nom);
+
+CREATE INDEX index_date_commande ON commande (com_dateCommande);
+
+INSERT INTO client (cli_nom, cli_prenom, cli_adresse, cli_cp, cli_ville, cli_tel, cli_mail)
+ VALUES ('Djibril', 'Clement', '11 rue de garenne', '20111', 'Amiens', '0647589663', 'terje250@tubidu.com'),
+ ('Rali', 'Romain', '11 rue de safd', '60000', 'Beauvais', '0647589663', 'asfa@sd.com'),
+ ('Kere', 'Karim', '11 rue de boulanger', '76000', 'Rouen', '0647589663', 'seee@ged.fr'),
+ ('Goui', 'Seydina', '11 rue de la verdure', '59000', 'Calais', '0647589663', 'sedere@petit.com'),
+ ('Douosd', 'Clement', '11 rue de careme', '13000', 'Marseille', '0647589663', 'rss@ripo.com'),
+ ('Goeoeo', 'Paul', '11 rue de la calle', '30000', 'Nîmes', '0647589663', 'elo@la.fr'),
+ ('Wiou', 'Ibo', '11 rue des deporté', '59000', 'Lens', '0647589663', 'boudina@gmail.com'),
+ ('Qthil', 'Arthur', '11 rue de asfd', '67000', 'Strasbourg', '0647589663', 'fautei@dsaf.ce'),
+ ('DjAibril', 'Johny', '11 rue de bonojour', '33000', 'Bordeaux', '0647589663', 'asdfasdf@colo.com'),
+ ('Ribbril', 'Quentin', '11 rue de rip', '44000', 'Nantes', '0647589663', 'commentaitr@rubi.com');
+
