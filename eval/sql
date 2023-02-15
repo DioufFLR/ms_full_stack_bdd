@@ -89,34 +89,34 @@ INSERT INTO client (cli_nom, cli_prenom, cli_adresse, cli_cp, cli_ville, cli_tel
  ('DjAibril', 'Johny', '11 rue de bonojour', '33000', 'Bordeaux', '0647589663', 'asdfasdf@colo.com'),
  ('Ribbril', 'Quentin', '11 rue de rip', '44000', 'Nantes', '0647589663', 'commentaitr@rubi.com');
 
-INSERT INTO produit (prod_code, prod_lib, prod_prixAchat, prod_stockPhy, prod_stockAlerte)
-VALUES ('AB8756', 'Chips', 5, 500, 250),
-('AB8654', 'Lait', 2, 350, 150),
-('AB8759', 'Farine', 1, 350, 250),
-('AB8757', 'Fromage', 6, 350, 150),
-('AB8753', 'Pomme', 2, 550, 300),
-('AB8751', 'Carte', 5, 50, 25),
-('AB8745', 'Chien', 150, 30, 15),
-('AB8796', 'Banane', 1, 500, 250),
-('AB8778', 'Chat', 500, 50, 25),
-('AC8736', 'Peluche', 35, 50, 25),
-('AB8766', 'Ortie', 3, 5000, 2500),
-('AD8788', 'Sanglier', 66, 50, 25),
-('AB8733', 'Peau', 8, 500, 250),
-('AB8744', 'Miroir', 22, 50, 25),
-('AB8755', 'Artichaut', 3, 500, 250),
-('AB8854', 'Miel', 5, 5000, 2500),
-('AB8164', 'Fourchette', 4,  500, 205),
-('CB8349', 'Couteau', 4, 500, 205),
-('AB8789', 'Asiette', 6, 500, 205),
-('AB8436', 'Kiwi', 1, 500, 205);
-
 INSERT INTO fournisseur (fourni_nom, fourni_adress, fourni_cp, fourni_ville)
 VALUES('Valeo','95, avenue Toussaint Chien', 26170, 'PROPIAC'),
 ('HyperU','11, rue Julien Maurices', 47470, 'CAUZAC'),
 ('Lamoule','8, avenue Gérard Petin', 67580, 'FORSTHEIM'),
 ('TapisVolant','55, rue Corinne Labombe', 63320, 'VERRIERES'),
 ('MosaiquePizza','66, boulevard Stephane Duchet', 78930, 'GUERVILLE');
+
+INSERT INTO produit (prod_code, prod_lib, prod_prixAchat, prod_stockPhy, prod_stockAlerte, fourni_id)
+VALUES ('AB8756', 'Chips', 5, 500, 250,1),
+('AB8654', 'Lait', 2, 350, 150,2),
+('AB8759', 'Farine', 1, 350, 250,4),
+('AB8757', 'Fromage', 6, 350, 150,2),
+('AB8753', 'Pomme', 2, 550, 300,1),
+('AB8751', 'Carte', 5, 50, 25,3),
+('AB8745', 'Chien', 150, 30, 15,4),
+('AB8796', 'Banane', 1, 500, 250,2),
+('AB8778', 'Chat', 500, 50, 25,2),
+('AC8736', 'Peluche', 35, 50, 25,1),
+('AB8766', 'Ortie', 3, 5000, 2500,3),
+('AD8788', 'Sanglier', 66, 50, 25,4),
+('AB8733', 'Peau', 8, 500, 250,2),
+('AB8744', 'Miroir', 22, 50, 25,3),
+('AB8755', 'Artichaut', 3, 500, 250,2),
+('AB8854', 'Miel', 5, 5000, 2500,1),
+('AB8164', 'Fourchette', 4,  500, 205,3),
+('CB8349', 'Couteau', 4, 500, 205,4),
+('AB8789', 'Asiette', 6, 500, 205,2),
+('AB8436', 'Kiwi', 1, 500, 205,1);
 
 INSERT INTO commande (com_dateCommande, com_dateLivraison, com_etatCommande, cli_id)
 VALUES('2021-04-24', '2022-05-23', 'En cours', 1),
@@ -129,3 +129,15 @@ VALUES('2021-04-24', '2022-05-23', 'En cours', 1),
 ('2021-07-08', '2023-01-15', 'Livré', 8),
 ('2021-03-03', '2023-05-23', 'En cours', 3),
 ('2021-04-12', '2023-01-23', 'Livré', 9);
+
+INSERT INTO panier(pan_quantiProduit, pan_prixVentePar, pan_prixVentePro, prod_code, com_id)
+VALUES(2,3,2.5,'AB8854',2),
+(1,2,1.75,'AD8788',4),
+(4,5,4.5,'AB8766',6),
+(10,2,1.75,'AB8164',2),
+(11,3,2,'CB8349',1),
+(2,2,1.75,'AB8854',9),
+(4,3,2.1,'AB8654',2),
+(6,2,1.75,'AD8788',8),
+(1,5,3.5,'CB8349',3),
+(7,2,1.75,'AD8788',1);
