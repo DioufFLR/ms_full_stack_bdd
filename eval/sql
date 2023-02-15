@@ -30,9 +30,9 @@ CREATE TABLE panier(
     pan_quantiProduit INT NOT NULL,
     pan_prixVentePar FLOAT NOT NULL,
     pan_prixVentePro FLOAT NOT NULL,
-    pro_code CHAR(6) NOT NULL,
+    prod_code CHAR(6) NOT NULL,
     com_id INT NOT NULL,
-    PRIMARY KEY (pro_code, com_id),
+    PRIMARY KEY (prod_code, com_id),
     FOREIGN KEY (com_id) REFERENCES commande (com_id)
 );
 
@@ -42,9 +42,9 @@ CREATE TABLE fournisseur(
     fourni_adress VARCHAR(100) NOT NULL,
     fourni_cp CHAR(5) NOT NULL,
     fourni_ville VARCHAR(50) NOT NULL,
-    fourni_tel VARCHAR(10) NOT NULL,
-    fourni_mail VARCHAR(50) NOT NULL,
-    fourni_type BIT(1) NOT NULL,
+    fourni_tel VARCHAR(10),
+    fourni_mail VARCHAR(50),
+    fourni_type BIT(1),
     PRIMARY KEY (fourni_id)
 );
 
@@ -55,7 +55,7 @@ CREATE TABLE rubrique(
 );
 
 CREATE TABLE produit(
-    pro_code CHAR(6) NOT NULL,
+    prod_code CHAR(6) NOT NULL,
     prod_lib VARCHAR(100) NOT NULL,
     prod_desc VARCHAR(250),
     prod_phot VARCHAR(250),
@@ -63,15 +63,15 @@ CREATE TABLE produit(
     prod_prixAchat INT NOT NULL,
     prod_stockPhy INT NOT NULL,
     prod_stockAlerte INT NOT NULL,
-    fourni_id INT NOT NULL,
-    rubri_id INT NOT NULL,
-    PRIMARY KEY (pro_code),
+    fourni_id INT,
+    rubri_id INT,
+    PRIMARY KEY (prod_code),
     CONSTRAINT FK_produitFourni FOREIGN KEY (fourni_id) REFERENCES fournisseur (fourni_id),
     CONSTRAINT FK_produitRubrique FOREIGN KEY (rubri_id) REFERENCES rubrique (rubri_id)
 );
 
 ALTER TABLE panier
-ADD FOREIGN KEY (pro_code) REFERENCES produit (pro_code);
+ADD FOREIGN KEY (prod_code) REFERENCES produit (prod_code);
 
 CREATE INDEX index_nom_client ON client (cli_nom);
 
@@ -89,3 +89,43 @@ INSERT INTO client (cli_nom, cli_prenom, cli_adresse, cli_cp, cli_ville, cli_tel
  ('DjAibril', 'Johny', '11 rue de bonojour', '33000', 'Bordeaux', '0647589663', 'asdfasdf@colo.com'),
  ('Ribbril', 'Quentin', '11 rue de rip', '44000', 'Nantes', '0647589663', 'commentaitr@rubi.com');
 
+INSERT INTO produit (prod_code, prod_lib, prod_prixAchat, prod_stockPhy, prod_stockAlerte)
+VALUES ('AB8756', 'Chips', 5, 500, 250),
+('AB8654', 'Lait', 2, 350, 150),
+('AB8759', 'Farine', 1, 350, 250),
+('AB8757', 'Fromage', 6, 350, 150),
+('AB8753', 'Pomme', 2, 550, 300),
+('AB8751', 'Carte', 5, 50, 25),
+('AB8745', 'Chien', 150, 30, 15),
+('AB8796', 'Banane', 1, 500, 250),
+('AB8778', 'Chat', 500, 50, 25),
+('AC8736', 'Peluche', 35, 50, 25),
+('AB8766', 'Ortie', 3, 5000, 2500),
+('AD8788', 'Sanglier', 66, 50, 25),
+('AB8733', 'Peau', 8, 500, 250),
+('AB8744', 'Miroir', 22, 50, 25),
+('AB8755', 'Artichaut', 3, 500, 250),
+('AB8854', 'Miel', 5, 5000, 2500),
+('AB8164', 'Fourchette', 4,  500, 205),
+('CB8349', 'Couteau', 4, 500, 205),
+('AB8789', 'Asiette', 6, 500, 205),
+('AB8436', 'Kiwi', 1, 500, 205);
+
+INSERT INTO fournisseur (fourni_nom, fourni_adress, fourni_cp, fourni_ville)
+VALUES('Valeo','95, avenue Toussaint Chien', 26170, 'PROPIAC'),
+('HyperU','11, rue Julien Maurices', 47470, 'CAUZAC'),
+('Lamoule','8, avenue Gérard Petin', 67580, 'FORSTHEIM'),
+('TapisVolant','55, rue Corinne Labombe', 63320, 'VERRIERES'),
+('MosaiquePizza','66, boulevard Stephane Duchet', 78930, 'GUERVILLE');
+
+INSERT INTO commande (com_dateCommande, com_dateLivraison, com_etatCommande, cli_id)
+VALUES('2021-04-24', '2022-05-23', 'En cours', 1),
+('2021-04-24', '2023-12-23', 'En cours', 2),
+('2021-05-22', '2023-11-24', 'En retard', 3),
+('2021-01-13', '2023-05-23', 'En cours', 2),
+('2022-04-27', '2023-10-19', 'En retard', 6),
+('2021-04-24', '2023-08-15', 'En cours', 5),
+('2021-02-11', '2023-07-23', 'En retard', 4),
+('2021-07-08', '2023-01-15', 'Livré', 8),
+('2021-03-03', '2023-05-23', 'En cours', 3),
+('2021-04-12', '2023-01-23', 'Livré', 9);
