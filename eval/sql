@@ -142,14 +142,33 @@ VALUES(2,3,2.5,'AB8854',2),
 (1,5,3.5,'CB8349',3),
 (7,2,1.75,'AD8788',1);
 
+--
+-- Utilisateurs
+--
+
+DROP USER IF EXISTS 'gestionnaire'@'%';
+DROP USER IF EXISTS 'approvisionneur'@'%';
+DROP USER IF EXISTS 'administrateur'@'%';
+
 CREATE USER 'gestionnaire'@'%' IDENTIFIED BY '0000';
 CREATE USER 'approvisionneur'@'%' IDENTIFIED BY '0000';
 CREATE USER 'administrateur'@'%' IDENTIFIED BY '0000';
 
+-- Utilisateur administrateur
+
 GRANT ALL PRIVILEGES ON jarditou.*
 TO 'administrateur'@'%';
 
-GRANT SELECT ON jarditou.produit AND jarditou.commande AND jarditou.client AND jarditou.panier
+-- Utilisateur gestionnaire
+
+GRANT SELECT ON jarditou.produit
+TO 'gestionnaire'@'%';
+GRANT SELECT ON jarditou.commande
+TO 'gestionnaire'@'%';
+GRANT SELECT ON jarditou.client
+TO 'gestionnaire'@'%';
+GRANT SELECT ON jarditou.panier
 TO 'gestionnaire'@'%';
 
 FLUSH PRIVILEGES;
+
