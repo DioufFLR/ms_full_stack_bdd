@@ -2,6 +2,10 @@ DROP DATABASE IF EXISTS `jarditou`;
 CREATE DATABASE `jarditou`;
 USE `jarditou`;
 
+--
+-- Création des tables
+--
+
 CREATE TABLE client(
     cli_id INT NOT NULL AUTO_INCREMENT,
     cli_type BOOLEAN,
@@ -76,6 +80,10 @@ ADD FOREIGN KEY (prod_code) REFERENCES produit (prod_code);
 CREATE INDEX index_nom_client ON client (cli_nom);
 
 CREATE INDEX index_date_commande ON commande (com_dateCommande);
+
+--
+-- Peuplement des tables
+--
 
 INSERT INTO client (cli_nom, cli_prenom, cli_adresse, cli_cp, cli_ville, cli_tel, cli_mail)
  VALUES ('Djibril', 'Clement', '11 rue de garenne', '20111', 'Amiens', '0647589663', 'terje250@tubidu.com'),
@@ -169,6 +177,14 @@ GRANT SELECT ON jarditou.client
 TO 'gestionnaire'@'%';
 GRANT SELECT ON jarditou.panier
 TO 'gestionnaire'@'%';
+
+-- Utilisateur approvisionneur
+
+GRANT SELECT, INSERT ON jarditou.produit
+TO 'approvisionneur'@'%';
+
+GRANT SELECT ON jarditou.fournisseur
+TO 'approvisionneur'@'%';
 
 FLUSH PRIVILEGES;
 
