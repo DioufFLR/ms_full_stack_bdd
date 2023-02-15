@@ -12,5 +12,3 @@ ON hotel.*
 TO 'util2'@'%';
 FLUSH PRIVILEGES;
 
-GRANT ALL PRIVILEGES
-ON

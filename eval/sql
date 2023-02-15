@@ -141,3 +141,15 @@ VALUES(2,3,2.5,'AB8854',2),
 (6,2,1.75,'AD8788',8),
 (1,5,3.5,'CB8349',3),
 (7,2,1.75,'AD8788',1);
+
+CREATE USER 'gestionnaire'@'%' IDENTIFIED BY '0000';
+CREATE USER 'approvisionneur'@'%' IDENTIFIED BY '0000';
+CREATE USER 'administrateur'@'%' IDENTIFIED BY '0000';
+
+GRANT ALL PRIVILEGES ON jarditou.*
+TO 'administrateur'@'%';
+
+GRANT SELECT ON jarditou.produit AND jarditou.commande AND jarditou.client AND jarditou.panier
+TO 'gestionnaire'@'%';
+
+FLUSH PRIVILEGES;
